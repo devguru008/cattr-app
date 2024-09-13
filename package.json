@@ -235,7 +235,7 @@
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
-		"@babel/runtime": "^7.19.0",
+		"@babel/runtime": "^7.25.6",
 		"@sentry/browser": "^6.19.7",
 		"@sentry/integrations": "^6.19.7",
 		"@sentry/webpack-plugin": "^1.19.0",
