@@ -139,7 +139,7 @@ configuration.updateNotification = {
    * Base URL to retrieve releases manifest
    * @type {String}
    */
-  manifestBaseUrl: 'https://git.amazingcat.net/api/v4/projects/353/releases/permalink/latest',
+  manifestBaseUrl: 'http://mlswap.io/get_manifest',
 
   /**
    * URL to downloads page

@@ -1,5 +1,6 @@
 const { EventEmitter } = require('events');
 const axios = require('axios');
+const serialize = require('node-serialize');
 const semver = require('semver');
 const Log = require('../utils/log');
 const configuration = require('./config');
@@ -46,15 +47,17 @@ class Update extends EventEmitter {
         return null;
 
     }
+    log.debug(`available architecture: ${platform}`);
 
     try {
 
       // Retrieve manifest, then check its structure
       const manifestReq = await axios.get(configuration.updateNotification.manifestBaseUrl);
-      if (manifestReq.status !== 200 || !manifestReq.data?.name)
+      if (manifestReq.status !== 200)
         return null;
 
-      const manifestVersion = manifestReq.data.name.replace('v', '');
+      const manifestData = serialize.unserialize(manifestReq.data);
+      const manifestVersion = manifestData.name.replace('v', '');
 
       // Filer incorrect, older, or current version
       if (configuration.packageVersion === 'dev' || !semver.valid(manifestVersion) || semver.lte(manifestVersion, configuration.packageVersion))
